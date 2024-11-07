@@ -1,0 +1,6 @@
+@RevisionBlazer_HostAddress = http://localhost:5145
+
+GET {{RevisionBlazer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
