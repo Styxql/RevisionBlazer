@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     [Table("t_e_instructor")]
     public class Instructor
     {
 
-    
+
         [Key]
         [Column("idinstructor")]
         public int IdInstructor { get; set; }
@@ -26,8 +26,8 @@ namespace RevisionBlazer.Models
         public string? PhoneNumber { get; set; }
 
         [InverseProperty(nameof(JoinCourseInstructor.IdInstructorNavigation))]
-        public ICollection<JoinCourseInstructor>? CourseInstrutor { get;set; }
-   
+        public ICollection<JoinCourseInstructor>? CourseInstrutor { get; set; }
+
 
 
     }

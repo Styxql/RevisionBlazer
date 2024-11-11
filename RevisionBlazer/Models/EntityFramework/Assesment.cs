@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     public class Assesment
     {
@@ -23,7 +23,11 @@ namespace RevisionBlazer.Models
         [Column("totalmarks")]
         public string TotalMarks { get; set; } = null!;
 
-        [Column("DueDate")]
+        [Column("duedate")]
         public DateTime? DueDate { get; set; }
+
+        [ForeignKey(nameof(IdCourse))]
+        [InverseProperty(nameof(Course.Assesments))]
+        public virtual Course? IdCourseNavigation { get; set; }
     }
 }

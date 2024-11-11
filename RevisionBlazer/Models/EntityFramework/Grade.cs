@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     public class Grade
     {
@@ -10,7 +10,7 @@ namespace RevisionBlazer.Models
         public int IdGrade { get; set; }
 
         [Column("enrollmentid")]
-        public string IdEnrollment { get; set; } = null!;
+        public int IdEnrollment { get; set; }
 
 
         [Column("assessmentid")]
@@ -20,8 +20,11 @@ namespace RevisionBlazer.Models
         public string Score { get; set; } = null!;
 
         [Column("feedback")]
-        public string? FeedBack{ get; set; }
+        public string? FeedBack { get; set; }
 
-       
+        [ForeignKey(nameof(IdEnrollment))]
+        [InverseProperty(nameof(Enrollment.Grades))]
+        public virtual Enrollment? IdEnrollmentNavigation { get; set; }
+
     }
 }

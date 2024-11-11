@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     public class Enrollment
     {
@@ -10,11 +10,11 @@ namespace RevisionBlazer.Models
         public int IdEnrollment { get; set; }
 
         [Column("idstudent")]
-        public string IdStudent { get; set; } = null!;
+        public int IdStudent { get; set; }
 
 
         [Column("idcourse")]
-        public string IdCourse { get; set; } = null!;
+        public int IdCourse { get; set; }
 
         [Column("status")]
         public string Status { get; set; } = null!;
@@ -32,7 +32,8 @@ namespace RevisionBlazer.Models
         [ForeignKey("IdStudent")]
         public virtual Student? IdStudentNavigation { get; set; }
 
+        [InverseProperty(nameof(Grade.IdEnrollmentNavigation))]
+        public virtual ICollection<Grade>? Grades { get; set; }
 
-        
     }
 }

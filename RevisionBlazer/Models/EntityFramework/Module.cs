@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     [Table("t_e_module")]
     public class Module
@@ -30,7 +30,9 @@ namespace RevisionBlazer.Models
         [Column("enddate")]
         public DateTime? EndDate { get; set; }
 
-
+        [InverseProperty(nameof(Course.Modules))]
+        [ForeignKey(nameof(IdCourse))]
+        public virtual Course? IdCourseNavigation { get; set; }
 
     }
 }

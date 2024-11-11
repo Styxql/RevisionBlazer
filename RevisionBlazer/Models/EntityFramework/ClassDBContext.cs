@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
-    public partial class ClassDBContext:DbContext
+    public partial class ClassDBContext : DbContext
     {
         public ClassDBContext()
         {
@@ -28,12 +28,20 @@ namespace RevisionBlazer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Enrollment>().HasKey(c=>new {c.IdCourse,c.IdStudent});
+            modelBuilder.Entity<Enrollment>().HasKey(c => new { c.IdCourse, c.IdStudent });
             modelBuilder.Entity<Enrollment>()
                    .HasOne(e => e.IdCourseNavigation)
                    .WithMany(c => c.Enrollments)
                    .HasForeignKey(e => e.IdCourse)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Assesment>().HasKey(c => c.IdAssessment);
+            modelBuilder.Entity<Enrollment>().HasKey(c => c.IdEnrollment);
+            modelBuilder.Entity<Grade>().HasKey(c => c.IdGrade);
+            modelBuilder.Entity<Module>().HasKey(c => c.IdModule);
+
+
+
 
             modelBuilder.Entity<Enrollment>()
                 .HasOne(e => e.IdStudentNavigation)
@@ -41,7 +49,7 @@ namespace RevisionBlazer.Models
                 .HasForeignKey(e => e.IdStudent)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<JoinCourseInstructor>().HasKey(c=>new {c.IdCourse,c.IdInstructor});
+            modelBuilder.Entity<JoinCourseInstructor>().HasKey(c => new { c.IdCourse, c.IdInstructor });
 
             modelBuilder.Entity<JoinCourseInstructor>()
                .HasOne(e => e.IdCourseNavigation)
@@ -53,6 +61,10 @@ namespace RevisionBlazer.Models
               .WithMany(s => s.CourseInstrutor)
               .HasForeignKey(e => e.IdInstructor)
               .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Course>().HasMany(c => c.Assesments).WithOne(c => c.IdCourseNavigation);
+            modelBuilder.Entity<Course>().HasMany(c => c.Modules).WithOne(c => c.IdCourseNavigation);
+            modelBuilder.Entity<Enrollment>().HasMany(c => c.Grades).WithOne(c => c.IdEnrollmentNavigation);
 
 
 

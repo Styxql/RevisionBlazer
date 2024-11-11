@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     [Table("t_e_student")]
     public class Student
@@ -15,21 +15,21 @@ namespace RevisionBlazer.Models
 
 
         [Column("email")]
-        public string Email { get; set; } = null!;
+        public string? Email { get; set; } 
 
         [Column("dateofbirth")]
-        public DateTime DateOfBirth { get; set; } 
+        public DateTime? DateOfBirth { get; set; }
 
         [Column("phonenumber")]
         public string? PhoneNumber { get; set; }
         [Column("address")]
-        public string Address { get; set; } 
+        public string? Address { get; set; }
         [Column("enrollmentdate")]
-        public string EnrollmentDate { get; set; } 
+        public string? EnrollmentDate { get; set; }
         [Column("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [InverseProperty(nameof(Enrollment.IdStudentNavigation))]
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual ICollection<Enrollment>? Enrollments { get; set; }
     }
 }

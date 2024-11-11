@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RevisionBlazer.Models
+namespace RevisionBlazer.Models.EntityFramework
 {
     [Table("joincourseinstructor")]
     public class JoinCourseInstructor
@@ -14,11 +14,10 @@ namespace RevisionBlazer.Models
         [Column("idcourse")]
         public int IdCourse { get; set; }
 
-        [ForeignKey(nameof(IdCourseNavigation))]
+        [ForeignKey(nameof(IdCourse))]
         public virtual Course? IdCourseNavigation { get; set; }
 
         [ForeignKey(nameof(IdInstructor))]
-
         public virtual Instructor? IdInstructorNavigation { get; set; }
     }
 }
