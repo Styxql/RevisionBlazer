@@ -1,18 +1,48 @@
-﻿@page "/counter"
+﻿@page "/fetchdata"
+@using RevisionClient.Models
+@using RevisionClient.Services
+@using RevisionClient.ViewModels
 
-<PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
+@inject RevisionClient.ViewModels.ViewModel ViewModel
 
-<p role="status">Current count: @currentCount</p>
+<PageTitle>Produit</PageTitle>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<h1>Produit</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (ViewModel.Enrollments == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Marque</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewModel.Enrollments)
+            {
+                <tr>
+                    <td>@item.Status</td>
+                    <td>@item.StudentName</td>
+                    <td>@item.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        await ViewModel.LoadInitialData();
     }
 }

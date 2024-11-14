@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using RevisionClient.Services;
+using RevisionClient.ViewModels;
 
 namespace RevisionClient
 {
@@ -11,8 +13,9 @@ namespace RevisionClient
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services.AddSingleton(ws => new WSService("https://localhost:7060/api/"));
-            builder.Services.AddScoped<ProduitViewModel>();
+            builder.Services.AddSingleton(ws => new WSService("https://localhost:7177/api/"));
+            builder.Services.AddScoped<ViewModel>();
+            await builder.Build().RunAsync();
 
         }
     }
